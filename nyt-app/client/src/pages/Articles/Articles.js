@@ -6,7 +6,7 @@ class Articles extends Component {
     return (
 		<div className="container">
         	<div className="jumbotron">
-          		<h1>New York Times </h1>
+          		<h1>New York Times Article Scrubber</h1>
         	</div>
         	<div className="panel panel-info">
           		<div className="panel-heading">
@@ -26,7 +26,7 @@ class Articles extends Component {
                 			<label for="endDate">End date (YYYY) </label>
                 			<input type="text" class="form-control" id="endDate" placeholder="2015" />
               			</div>
-              			<button type="submit" class="btn btn-default">Submit</button>
+              			<button type="submit" class="btn btn-info">Submit</button>
             		</form>
           		</div>
         	</div>
@@ -42,8 +42,8 @@ class Articles extends Component {
               			<div className="articleDate">
                 			<p>Date goes here</p>
               			</div>
-              			<button type="button" className="saveArticle">Save Article</button>
-              			<button type="button" className="viewArticle">View Article</button>
+              			<button type="button" className="btn btn-info saveArticle">Save Article</button>
+              			<button type="button" className="btn btn-info viewArticle">View Article</button>
             		</div>
           		</div>
         	</div>
