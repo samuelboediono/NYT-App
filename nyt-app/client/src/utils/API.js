@@ -7,7 +7,7 @@ export default {
   	
   	const apiKey ="ea63fbb9a53b4d0db332bcd3ea891509";
 
-  	axios.get(url, {
+  	return axios.get(url, {
     params: {
       'q': data.query,
       'begin_date': `${data.startDate}0101`,
@@ -16,7 +16,7 @@ export default {
     }
   })
   .then(function (response) {
-    console.log(response);
+    return response;
   })
   .catch(function (error) {
     console.log(error);

@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import Results from "../../components/Results";
 
 
 class Articles extends Component {
 	state = {
    		articles: [],
+   		articlesSubmitted: false,
     	query: "",
     	startDate: "",
     	endDate: ""
   	};
+
+  	componentWillUpdate() {
+  		console.log(this.state.articles)
+  	}
 
   	handleInputChange = event => {
 
@@ -27,7 +33,7 @@ class Articles extends Component {
         		startDate: this.state.startDate,
         		endDate: this.state.endDate
       		})
-        .then(res => this.getArticles())
+        .then(res => this.setState({ articles: res.data.response.docs, articlesSubmitted: true}))
         .catch(err => console.log(err));
     	}
   	};
@@ -88,23 +94,7 @@ class Articles extends Component {
             		</form>
           		</div>
         	</div>
-         	<div className="panel panel-info">
-          		<div className="panel-heading">
-            		<h3 className="panel-title">Panel title</h3>
-          		</div>
-          		<div className="panel-body">
-            		<div className="articleCard">
-              			<div className="articleTitle">
-                			<p>Title goes here</p>
-              			</div>
-              			<div className="articleDate">
-                			<p>Date goes here</p>
-              			</div>
-              			<button type="button" className="btn btn-info saveArticle">Save Article</button>
-              			<button type="button" className="btn btn-info viewArticle">View Article</button>
-            		</div>
-          		</div>
-        	</div>
+        	{this.state.articlesSubmitted ? <Results results={this.state.articles} /> : <div> Not Submitted </div> }
      	</div>
 
 
