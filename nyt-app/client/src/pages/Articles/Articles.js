@@ -1,7 +1,37 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
 
 
 class Articles extends Component {
+	state = {
+   		articles: [],
+    	query: "",
+    	startDate: "",
+    	endDate: ""
+  	};
+
+  	handleInputChange = event => {
+
+  		const { name, value } = event.target;
+  		this.setState({
+  			[name] : value
+  		});
+  		console.log(this.state);
+  	};
+
+  	handleFormSubmit = event => {
+    	event.preventDefault();
+    	if (this.state.query && this.state.startDate && this.state.endDate) {
+      		API.getArticles ({
+        		query: this.state.query,
+        		startDate: this.state.startDate,
+        		endDate: this.state.endDate
+      		})
+        .then(res => this.getArticles())
+        .catch(err => console.log(err));
+    	}
+  	};
+
 	render() {
     return (
 		<div className="container">
@@ -15,18 +45,46 @@ class Articles extends Component {
           		<div className="panel-body">
             		<form>
               			<div class="form-group">
-                			<label for="search">Search</label>
-                			<input type="text" class="form-control" id="search" placeholder="Search here" />
+                			<label for="search">query</label>
+                			<input 
+                				value={this.state.query}
+                				onChange={this.handleInputChange}
+                				name="query"
+                				className="form-control"
+                				id="search" 
+                				placeholder="Search here" 
+                			/>
               			</div>
               			<div class="form-group">
                 			<label for="startDate">Start date (YYYY) </label>
-                			<input type="text" class="form-control" id="startDate" placeholder="2010" />
+                			<input 
+                				type="text"
+                				className="form-control"
+                				id="startDate"
+                				placeholder="2010"
+                				value={this.state.startDate}
+                				onChange={this.handleInputChange}
+                				name="startDate"
+                			/>
               			</div>
               			<div class="form-group">
                 			<label for="endDate">End date (YYYY) </label>
-                			<input type="text" class="form-control" id="endDate" placeholder="2015" />
+                			<input 
+                				type="text"
+                				className="form-control"
+                				id="endDate"
+                				placeholder="2015"
+                				value={this.state.endDate}
+                				onChange={this.handleInputChange}
+                				name="endDate"
+                			/>
               			</div>
-              			<button type="submit" class="btn btn-info">Submit</button>
+              			<button type="submit" class="btn btn-info"
+              			disabled={!(this.state.query && this.state.startDate && this.state.startDate)}
+                		onClick={this.handleFormSubmit}
+              			>
+              			Submit
+              			</button>
             		</form>
           		</div>
         	</div>
