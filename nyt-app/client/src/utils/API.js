@@ -23,10 +23,11 @@ export default {
   });
   },
 
-  getSaved: function () {
-    axios.get("/api/article/").then(function(res) {
-      console.log(res);
-    });
+  getSaved: function(data){
+    return axios.get("/api/article")
+    .then(function(res){
+      return res
+    })
   },
 
   postArticle: function(obj) {
