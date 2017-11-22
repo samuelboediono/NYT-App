@@ -11,7 +11,7 @@ export default {
     params: {
       'q': data.query,
       'begin_date': `${data.startDate}0101`,
-      'end_date': `${data.endDate}0101`,
+      'end_date': `${data.endDate}1231`,
       'api-key': apiKey,
     }
   })
@@ -22,4 +22,20 @@ export default {
     console.log(error);
   });
   },
+
+  getSaved: function () {
+    axios.get("/api/article/").then(function(res) {
+      console.log(res);
+    });
+  },
+
+  postArticle: function(obj) {
+    axios.post("api/article/saved", {
+      title: obj.title,
+      date: obj.date,
+      url: obj.url
+    }).then(function(res) {
+      console.log(res)
+    })
+  }
 };
